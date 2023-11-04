@@ -11,7 +11,9 @@ export default function PongPage() {
       footprints: false,
       predictions: false
     })
-    pong.startSinglePlayer()
+    setTimeout(() => {
+      pong.startSinglePlayer()
+    }, 200)
   }
   return (
     <>
