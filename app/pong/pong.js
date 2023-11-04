@@ -286,7 +286,7 @@ Pong = {
   Sounds: {
     initialize: function (pong) {
       this.game = pong
-      this.supported = Game.ua.hasAudio
+      this.supported = true
       if (this.supported) {
         this.files = {
           ping: Game.createAudio('sounds/ping.wav'),
