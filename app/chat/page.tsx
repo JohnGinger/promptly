@@ -2,12 +2,10 @@
 import { useState } from 'react'
 
 export default function ChatPage() {
-  const [messages, setMessages] = useState([])
+  const [messages, setMessages] = useState([''])
   const [newMessage, setNewMessage] = useState('')
 
   const sendMessage = async () => {
-    setMessages([...messages, newMessage])
-
     // send a post request to the server
     let { completion } = await fetch('/api/chat', {
       method: 'POST',
@@ -19,6 +17,7 @@ export default function ChatPage() {
       }
     }).then(x => x.json())
     setMessages([...messages, completion])
+    setNewMessage('')
   }
 
   return (
@@ -36,7 +35,10 @@ export default function ChatPage() {
         />
       </div>
       <button
-        onClick={() => sendMessage()}
+        onClick={async () => {
+          setMessages([...messages, newMessage])
+          await sendMessage()
+        }}
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
       >
         Ask
