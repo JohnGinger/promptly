@@ -4,10 +4,7 @@
 import { useState } from 'react'
 import { LoadingSpinner } from '../pong/LoadingSpinner'
 
-export default function ChatPage({
-  setLoading,
-  loading
-}: any) {
+export default function ChatPage({ setLoading, loading }: any) {
   const [newMessage, setNewMessage] = useState('')
 
   const sendMessage = async () => {
@@ -113,6 +110,10 @@ export default function ChatPage({
           Generate Code
         </button>
       )}
+      <div className=" text-xl font-bold font-sans mt-4">
+        The 7 rules of prompt engineering
+      </div>
+      
     </div>
   )
 }
