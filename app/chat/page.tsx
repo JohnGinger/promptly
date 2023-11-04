@@ -16,7 +16,14 @@ export default function ChatPage() {
         'Content-type': 'application/json; charset=UTF-8'
       }
     }).then(x => x.json())
-    setMessages([...messages, completion])
+    setMessages([...messages, completion]);
+    try {
+      console.log('🚀 ~ file: page.tsx:20 ~ sendMessage ~ completion:', completion);
+      console.log('🚀 ~ file: page.tsx:20 ~ sendMessage ~ completion.code:', JSON.parse(completion).code);
+      (window as any).Pong.Code = JSON.parse(completion).code;
+    } catch (e) {
+      console.log('error parsing code');
+    }pp
     setNewMessage('')
   }
 

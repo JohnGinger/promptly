@@ -145,6 +145,7 @@ Pong = {
     let ball_positions = [[this.ball.x, this.ball.y]]
     let paddle_y = (this.leftPaddle.top + this.leftPaddle.bottom) / 2
     let direction = this.pongAI(ball_positions, paddle_y) || 0;
+    // console.log('🚀 ~ file: pong.js:148 ~ direction:', direction)
     if (direction == 1) {
       this.leftPaddle.stopMovingDown()
       this.leftPaddle.moveUp()
@@ -163,7 +164,8 @@ Pong = {
   pongAI: function pongAi(ball_positions, paddle_y) {
     if (Pong.Code) {
       try{
-        eval('(function() {' + Pong.Code + '}())');
+        console.log('🚀 ~ file: pong.js:165 ~ pongAi ~ Pong.Code:', Pong.Code)
+        return eval('(function() {' + Pong.Code + '}())');
       } catch (e) {
         console.log(e);
         return 0;

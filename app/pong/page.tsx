@@ -10,9 +10,10 @@ export default function PongPage() {
   const [code, setCode] = React.useState('');
 
   const handleCodeChange = (e: any) => {
-    setCode(e.target.value);
-    (window as any).Pong.Code = code;
-  };
+    setCode(e.target.value)
+    console.log('🚀 ~ file: page.tsx:12 ~ handleCodeChange ~ e.target.value:', e.target.value)
+    ;(window as any).Pong.Code = e.target.value
+  }
 
   const startGame = () => {
     // @ts-ignore
