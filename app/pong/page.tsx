@@ -10,10 +10,10 @@ export default function PongPage() {
   return (
     <div className="flex h-screen">
       <NoSSR>
-        <div className="w-1/2 bg-blue-500">
+        <div className="w-1/2">
           <Chat />
         </div>
-        <div className="w-1/2 bg-red-500">
+        <div className="w-1/2">
           <PongGame />
         </div>
       </NoSSR>

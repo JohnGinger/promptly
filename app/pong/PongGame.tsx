@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react'
 import './game'
 import './pong'
+import { CodeBlock } from 'react-code-blocks'
 
 let pongInstance: any = null
 
@@ -32,7 +33,6 @@ export default function PongGame() {
     let game = window.Game
 
     if (pongInstance === null) {
-      console.log('starting game')
       // @ts-ignore
       pongInstance = game.start('game', window.Pong, {
         sound: true,
@@ -56,27 +56,20 @@ export default function PongGame() {
   }, [])
 
   return (
-    <>
-      <canvas id="game" />
-      <div className="p-4">
-        <textarea
-          value={code}
-          onChange={handleCodeChange}
-          className="w-full p-4 h-60 text-base text-gray-700 bg-white border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
-        />
-        <button
-          onClick={() => {
-            if (pongInstance === null) return
-            // @ts-ignore
-            window.Pong.Code = code
-            pongInstance.stop()
-            pongInstance.startSinglePlayer()
-          }}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        >
-          update
-        </button>
+    <div className="flex flex-col mt-8">
+      <div className="flex flex-row justify-between pl-8 pr-8 align-middle items-center">
+        <div className="w-28 text-center text-black text-lg font-bold font-sans leading-snug">
+          You
+        </div>
+        <div className="w-28 text-center text-black text-lg font-bold font-sans leading-snug">
+          The Computer
+        </div>
       </div>
-    </>
+      <canvas id="game" className="bg-black	m-4" />
+      <div className="p-4">
+        <div className=" text-xl font-bold font-sans ">the generated code</div>
+        <CodeBlock text={code} language="javascript" showLineNumbers={false} />
+      </div>
+    </div>
   )
 }

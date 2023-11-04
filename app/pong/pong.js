@@ -224,10 +224,14 @@ Pong = {
     },
 
     draw: function (ctx) {
-      if (this.winner == 0)
-        ctx.drawImage(this.winner1.image, this.winner1.x, this.winner1.y)
-      else if (this.winner == 1)
-        ctx.drawImage(this.winner2.image, this.winner2.x, this.winner2.y)
+      if (this.winner == 0) {
+        // draw text on the canvas
+        ctx.font = '148px serif'
+        ctx.fillText('You win!', 35, 280)
+      } else if (this.winner == 1) {
+        ctx.font = '148px serif'
+        ctx.fillText('You lose!', 35, 280)
+      }
     }
   },
 
