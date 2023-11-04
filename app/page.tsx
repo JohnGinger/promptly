@@ -12,7 +12,7 @@ type CardProps = {
 const Card = ({ title, level, description, image, link }: CardProps) => {
   return (
     <Link href={link}>
-      <div className="relative bg-white flex flex-row rounded-2xl shadow mb-8 p-4 justify-between hover:bg-sky-700">
+      <div className="relative bg-white flex flex-row rounded-2xl shadow mb-8 p-4 justify-between hover:bg-teal-200">
         <div className="flex-col">
           <div className="text-gray-800 text-xl font-bold font-sans leading-7">
             {title}
