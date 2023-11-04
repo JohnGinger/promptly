@@ -9,6 +9,11 @@ export default function ChatPage() {
   const [messages, setMessages] = useState([''])
   const [newMessage, setNewMessage] = useState('')
 
+  const extractJSContent = (str: string) => {
+    const matches = str.match(/<javascript>(.*?)<\/javascript>/);
+    return matches ? matches[1] : null;
+  }
+
   const sendMessage = async () => {
     // send a post request to the server
     let { completion } = await fetch('/api/chat', {
@@ -22,7 +27,7 @@ export default function ChatPage() {
     }).then(x => x.json())
     setMessages([...messages, completion]);
     try {
-      (window as any).Pong.Code = JSON.parse(completion).code;
+      (window as any).Pong.Code = extractJSContent(completion);
       pongInstance.stop()
       pongInstance.startSinglePlayer()
     } catch (e) {
