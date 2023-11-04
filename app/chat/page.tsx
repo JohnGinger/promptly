@@ -3,7 +3,7 @@
 
 import { useState } from 'react'
 
-export default function ChatPage() {
+export default function ChatPage({ setLoading }: { setLoading: any }) {
   const [newMessage, setNewMessage] = useState('')
 
   const extractJSContent = (str: string) => {
@@ -15,7 +15,7 @@ export default function ChatPage() {
     // @ts-ignore
     let pongInstance = window.pongInstance
     pongInstance.stop()
-    pongInstance.loading = true
+    setLoading(true)
 
     let { completion } = await fetch('/api/chat', {
       method: 'POST',
@@ -30,7 +30,7 @@ export default function ChatPage() {
       // @ts-ignore
       window.Pong.Code = JSON.parse(completion).code
       pongInstance.startSinglePlayer()
-      pongInstance.loading = false
+      setLoading(false)
     } catch (e) {
       console.log('error parsing code')
     }

@@ -5,16 +5,18 @@ import NoSSR from 'react-no-ssr'
 
 import Chat from '../chat/page'
 import PongGame from './PongGame'
+import { useState } from 'react'
 
 export default function PongPage() {
+  const [loading, setLoading] = useState(false)
   return (
     <div className="flex h-screen">
       <NoSSR>
         <div className="w-1/2">
-          <Chat />
+          <Chat setLoading={setLoading} />
         </div>
         <div className="w-1/2">
-          <PongGame />
+          <PongGame loading={loading} />
         </div>
       </NoSSR>
     </div>
