@@ -60,12 +60,13 @@ export default function PongPage() {
     <>
       <canvas id="game" />
       <div className="p-4">
-        <textarea
+        {/* <textarea
           value={code}
           onChange={handleCodeChange}
+          style={{ display: 'block' }}
           className="w-full p-4 h-60 text-base text-gray-700 bg-white border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
-        />
-        <button
+        /> */}
+        {/* <button
           onClick={() => {
             if (pongInstance === null) return
             // @ts-ignore
@@ -76,7 +77,7 @@ export default function PongPage() {
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
         >
           update
-        </button>
+        </button> */}
       </div>
     </>
   )

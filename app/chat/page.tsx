@@ -3,6 +3,8 @@
 
 import { useState } from 'react'
 
+let pongInstance: any = null
+
 export default function ChatPage() {
   const [messages, setMessages] = useState([''])
   const [newMessage, setNewMessage] = useState('')
@@ -20,9 +22,9 @@ export default function ChatPage() {
     }).then(x => x.json())
     setMessages([...messages, completion]);
     try {
-      // (window as any).Pong.Code = JSON.parse(completion).code;
-      const event = new CustomEvent('codeChange', { detail: JSON.parse(completion).code });
-      window.dispatchEvent(event);
+      (window as any).Pong.Code = JSON.parse(completion).code;
+      pongInstance.stop()
+      pongInstance.startSinglePlayer()
     } catch (e) {
       console.log('error parsing code');
     }
