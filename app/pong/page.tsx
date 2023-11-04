@@ -5,6 +5,7 @@ import './pong'
 
 export default function PongPage() {
   const startGame = () => {
+    // @ts-ignore
     let pong = window.Game.start('game', window.Pong, {
       sound: true,
       stats: false,
@@ -14,7 +15,6 @@ export default function PongPage() {
     setTimeout(() => {
       pong.startSinglePlayer()
     }, 200)
-    window.pongTest = pong
   }
   return (
     <>

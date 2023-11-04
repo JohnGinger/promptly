@@ -23,7 +23,7 @@ export default function ChatPage() {
   return (
     <div>
       {messages.map(message => {
-        return <div>{message}</div>
+        return <div key={message}>{message}</div>
       })}
       <div>
         <input
