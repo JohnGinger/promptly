@@ -18,12 +18,12 @@ export default function ChatPage() {
     }).then(x => x.json())
     setMessages([...messages, completion]);
     try {
-      console.log('🚀 ~ file: page.tsx:20 ~ sendMessage ~ completion:', completion);
-      console.log('🚀 ~ file: page.tsx:20 ~ sendMessage ~ completion.code:', JSON.parse(completion).code);
-      (window as any).Pong.Code = JSON.parse(completion).code;
+      // (window as any).Pong.Code = JSON.parse(completion).code;
+      const event = new CustomEvent('codeChange', { detail: JSON.parse(completion).code });
+      window.dispatchEvent(event);
     } catch (e) {
       console.log('error parsing code');
-    }pp
+    }
     setNewMessage('')
   }
 

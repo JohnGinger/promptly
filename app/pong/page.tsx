@@ -1,5 +1,5 @@
 'use client'
-import React, { use, useEffect } from 'react'
+import React, { use, useEffect, useState } from 'react'
 import './pong.css'
 import './game'
 import './pong'
@@ -8,12 +8,26 @@ let pongInstance: any = null
 
 export default function PongPage() {
   // @ts-ignore
-  const [code, setCode] = React.useState('')
+  const [code, setCode] = useState(window.Pong.Code)
+
+  useEffect(() => {
+    // Event handler for code changes
+    function handleCodeChange(e: any) {
+      setCode(e.detail);
+    }
+    
+    // Add event listener for the custom event
+    window.addEventListener('codeChange', handleCodeChange);
+    
+    // Remove event listener on cleanup
+    return () => window.removeEventListener('codeChange', handleCodeChange);
+  }, []); // Empty array ensures that effect is only run on mount and unmount
+
 
   const handleCodeChange = (e: any) => {
+    console.log('🚀 ~ file: page.tsx:32 ~ handleCodeChange ~ e:', e)
     setCode(e.target.value)
-    console.log('🚀 ~ file: page.tsx:12 ~ handleCodeChange ~ e.target.value:', e.target.value)
-    ;(window as any).Pong.Code = e.target.value
+    // ;(window as any).Pong.Code = e.target.value
   }
 
   const startGame = () => {
