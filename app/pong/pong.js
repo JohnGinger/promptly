@@ -112,7 +112,7 @@ Pong = {
   goal: function (playerNo) {
     this.sounds.goal()
     this.scores[playerNo] += 1
-    if (this.scores[playerNo] == 9) {
+    if (this.scores[playerNo] == 3) {
       this.menu.declareWinner(playerNo)
       this.stop()
     } else {
@@ -144,8 +144,7 @@ Pong = {
     this.rightPaddle.draw(ctx)
     let ball_positions = [[this.ball.x, this.ball.y]]
     let paddle_y = (this.leftPaddle.top + this.leftPaddle.bottom) / 2
-    let direction = this.pongAI(ball_positions, paddle_y) || 0;
-    // console.log('🚀 ~ file: pong.js:148 ~ direction:', direction)
+    let direction = this.pongAI(ball_positions, paddle_y) || 0
     if (direction == 1) {
       this.leftPaddle.stopMovingDown()
       this.leftPaddle.moveUp()
@@ -160,78 +159,29 @@ Pong = {
       this.menu.draw(ctx)
     }
   },
+  Code: `
+    // ball_positions is an array of ball positions in (x,y) co-ordinates, with the last element in the array being the current position
+  
+    // paddle_y is the y coordinate of the center of the paddle
+    
+    // This function returns either 
+    // 1 - the paddle should move up
+    // 0 - the paddle should stay where it is
+    // -1 - the paddle should move down
+    return 1
+  `,
 
   pongAI: function pongAi(ball_positions, paddle_y) {
     if (Pong.Code) {
-      try{
-        console.log('🚀 ~ file: pong.js:165 ~ pongAi ~ Pong.Code:', Pong.Code)
-        return eval('(function() {' + Pong.Code + '}())');
+      try {
+        let func = new Function('ball_positions', 'paddle_y', Pong.Code)
+        return func(ball_positions, paddle_y)
       } catch (e) {
-        console.log(e);
-        return 0;
+        console.log(e)
+        return 0
       }
     } else {
-      // Get latest ball position
-      let ball_x = ball_positions[ball_positions.length - 1][0]
-      let ball_y = ball_positions[ball_positions.length - 1][1]
-  
-      // Check if ball is above paddle
-      if (ball_y < paddle_y) {
-        return 1 // Move paddle up
-  
-        // Check if ball is below paddle
-      } else if (ball_y > paddle_y) {
-        return -1 // Move paddle down
-      }
-  
-      return 0 // Otherwise don't move
-    }
-
-  },
-
-  onkeydown: function (keyCode) {
-    switch (keyCode) {
-      case Game.KEY.ZERO:
-        this.startDemo()
-        break
-      case Game.KEY.ONE:
-        this.startSinglePlayer()
-        break
-      case Game.KEY.TWO:
-        this.startDoublePlayer()
-        break
-      case Game.KEY.ESC:
-        this.stop(true)
-        break
-      case Game.KEY.Q:
-        if (!this.leftPaddle.auto) this.leftPaddle.moveUp()
-        break
-      case Game.KEY.A:
-        if (!this.leftPaddle.auto) this.leftPaddle.moveDown()
-        break
-      case Game.KEY.P:
-        if (!this.rightPaddle.auto) this.rightPaddle.moveUp()
-        break
-      case Game.KEY.L:
-        if (!this.rightPaddle.auto) this.rightPaddle.moveDown()
-        break
-    }
-  },
-
-  onkeyup: function (keyCode) {
-    switch (keyCode) {
-      case Game.KEY.Q:
-        if (!this.leftPaddle.auto) this.leftPaddle.stopMovingUp()
-        break
-      case Game.KEY.A:
-        if (!this.leftPaddle.auto) this.leftPaddle.stopMovingDown()
-        break
-      case Game.KEY.P:
-        if (!this.rightPaddle.auto) this.rightPaddle.stopMovingUp()
-        break
-      case Game.KEY.L:
-        if (!this.rightPaddle.auto) this.rightPaddle.stopMovingDown()
-        break
+      return 0
     }
   },
 
