@@ -17,6 +17,7 @@ export default function PongGame({ loading }: { loading: boolean }) {
     let game = window.Game
 
     if (pongInstance === null) {
+      console.log('starting game')
       // @ts-ignore
       pongInstance = game.start('game', window.Pong, {
         sound: true,
@@ -36,10 +37,14 @@ export default function PongGame({ loading }: { loading: boolean }) {
   }
 
   useEffect(() => {
+    if (pongInstance !== null) {
+      setCode(pongInstance.Code)
+      pongInstance.startSinglePlayer()
+    }
     setTimeout(() => {
       startGame()
     }, 200)
-  }, [])
+  }, [loading])
 
   return (
     <div className="flex flex-col mt-8">
@@ -54,15 +59,7 @@ export default function PongGame({ loading }: { loading: boolean }) {
       <canvas id="game" className="bg-black	m-4" />
       <div className="p-4">
         <div className=" text-xl font-bold font-sans ">the generated code</div>
-        {loading ? (
-          <LoadingSpinner />
-        ) : (
-          <CodeBlock
-            text={code}
-            language="javascript"
-            showLineNumbers={false}
-          />
-        )}
+        <CodeBlock text={code} language="javascript" showLineNumbers={false} />
       </div>
     </div>
   )

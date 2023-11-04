@@ -17,7 +17,8 @@ export default function PongPage() {
           <Chat setLoading={setLoading} loading={loading} />
         </div>
         <div className="w-1/2">
-          {loading ? <LoadingSpinner /> : <PongGame loading={loading} />}
+          {loading && <LoadingSpinner />}
+          <PongGame loading={loading} />
         </div>
       </NoSSR>
     </div>

@@ -11,11 +11,12 @@ export default function ChatPage({ setLoading, loading }: any) {
     // @ts-ignore
     let pongInstance = window.pongInstance
     pongInstance.stop()
+    pongInstance = null
     setLoading(true)
 
     function extractJSCode(str: string) {
-      const matches = str.match(/<javascript>([\s\S]*?)<\/javascript>/);
-      return matches ? matches[1] : '';
+      const matches = str.match(/<javascript>([\s\S]*?)<\/javascript>/)
+      return matches ? matches[1] : ''
     }
 
     let { completion } = await fetch('/api/chat', {
@@ -46,15 +47,13 @@ export default function ChatPage({ setLoading, loading }: any) {
       }
     }).then(x => x.json())
     try {
+      const parsed = extractJSCode(completion)
       // @ts-ignore
-      console.log('🚀 ~ file: page.tsx:54 ~ completion:', completion)
-      console.log('🚀 ~ file: page.tsx:54 ~ completion:', extractJSCode(completion));
-      const parsed = extractJSCode(completion)?.replace(/\\n/g, '');
-      console.log('🚀 ~ file: page.tsx:55 ~ parsed:', parsed)
-      window.Pong.Code = extractJSCode(completion)?.replace(/\\n/g, '');
-      pongInstance.startSinglePlayer()
+      window.Pong.Code = parsed
+      // pongInstance.startSinglePlayer()
       setLoading(false)
     } catch (e) {
+      console.error(e)
       console.log('error parsing code')
     }
   }
@@ -113,7 +112,6 @@ export default function ChatPage({ setLoading, loading }: any) {
       <div className=" text-xl font-bold font-sans mt-4">
         The 7 rules of prompt engineering
       </div>
-      
     </div>
   )
 }
