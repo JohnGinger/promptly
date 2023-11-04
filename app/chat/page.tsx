@@ -2,8 +2,15 @@
 'use client'
 
 import { useState } from 'react'
+import { LoadingSpinner } from '../pong/LoadingSpinner'
 
-export default function ChatPage({ setLoading }: { setLoading: any }) {
+export default function ChatPage({
+  setLoading,
+  loading
+}: {
+  setLoading: any
+  loading: boolean
+}) {
   const [newMessage, setNewMessage] = useState('')
 
   const extractJSContent = (str: string) => {
@@ -64,8 +71,9 @@ export default function ChatPage({ setLoading }: { setLoading: any }) {
       <div>
         <textarea
           onChange={e => setNewMessage(e.target.value)}
+          readOnly={loading}
           onKeyDown={e => {
-            if (e.key === 'Enter') {
+            if (e.key === 'Enter' && !loading) {
               sendMessage()
             }
           }}
@@ -74,14 +82,18 @@ export default function ChatPage({ setLoading }: { setLoading: any }) {
           placeholder="Your Prompt"
         />
       </div>
-      <button
-        onClick={async () => {
-          sendMessage()
-        }}
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded "
-      >
-        Generate Code
-      </button>
+
+      {!loading && (
+        <button
+          onClick={async () => {
+            sendMessage()
+          }}
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded "
+          disabled={loading}
+        >
+          Generate Code
+        </button>
+      )}
     </div>
   )
 }

@@ -6,6 +6,7 @@ import NoSSR from 'react-no-ssr'
 import Chat from '../chat/page'
 import PongGame from './PongGame'
 import { useState } from 'react'
+import { LoadingSpinner } from './LoadingSpinner'
 
 export default function PongPage() {
   const [loading, setLoading] = useState(false)
@@ -13,10 +14,10 @@ export default function PongPage() {
     <div className="flex h-screen">
       <NoSSR>
         <div className="w-1/2">
-          <Chat setLoading={setLoading} />
+          <Chat setLoading={setLoading} loading={loading} />
         </div>
         <div className="w-1/2">
-          <PongGame loading={loading} />
+          {loading ? <LoadingSpinner /> : <PongGame loading={loading} />}
         </div>
       </NoSSR>
     </div>
