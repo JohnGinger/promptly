@@ -25,6 +25,8 @@ Pong = {
     predictionExact: 'red'
   },
 
+  Code: '',
+
   Images: ['images/press1.png', 'images/press2.png', 'images/winner.png'],
 
   Levels: [
@@ -142,7 +144,7 @@ Pong = {
     this.rightPaddle.draw(ctx)
     let ball_positions = [[this.ball.x, this.ball.y]]
     let paddle_y = (this.leftPaddle.top + this.leftPaddle.bottom) / 2
-    let direction = this.pongAI(ball_positions, paddle_y)
+    let direction = this.pongAI(ball_positions, paddle_y) || 0;
     if (direction == 1) {
       this.leftPaddle.stopMovingDown()
       this.leftPaddle.moveUp()
@@ -159,20 +161,30 @@ Pong = {
   },
 
   pongAI: function pongAi(ball_positions, paddle_y) {
-    // Get latest ball position
-    let ball_x = ball_positions[ball_positions.length - 1][0]
-    let ball_y = ball_positions[ball_positions.length - 1][1]
-
-    // Check if ball is above paddle
-    if (ball_y < paddle_y) {
-      return 1 // Move paddle up
-
-      // Check if ball is below paddle
-    } else if (ball_y > paddle_y) {
-      return -1 // Move paddle down
+    if (Pong.Code) {
+      try{
+        eval('(function() {' + Pong.Code + '}())');
+      } catch (e) {
+        console.log(e);
+        return 0;
+      }
+    } else {
+      // Get latest ball position
+      let ball_x = ball_positions[ball_positions.length - 1][0]
+      let ball_y = ball_positions[ball_positions.length - 1][1]
+  
+      // Check if ball is above paddle
+      if (ball_y < paddle_y) {
+        return 1 // Move paddle up
+  
+        // Check if ball is below paddle
+      } else if (ball_y > paddle_y) {
+        return -1 // Move paddle down
+      }
+  
+      return 0 // Otherwise don't move
     }
 
-    return 0 // Otherwise don't move
   },
 
   onkeydown: function (keyCode) {
