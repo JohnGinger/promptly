@@ -7,10 +7,7 @@ import { LoadingSpinner } from '../pong/LoadingSpinner'
 export default function ChatPage({
   setLoading,
   loading
-}: {
-  setLoading: any
-  loading: boolean
-}) {
+}: any) {
   const [newMessage, setNewMessage] = useState('')
 
   const extractJSContent = (str: string) => {
