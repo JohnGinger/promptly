@@ -268,17 +268,7 @@ Game = {
       }
     },
 
-    addEvents: function () {
-      Game.addEvent(document, 'keydown', this.onkeydown.bind(this))
-      Game.addEvent(document, 'keyup', this.onkeyup.bind(this))
-    },
-
-    onkeydown: function (ev) {
-      if (this.game.onkeydown) this.game.onkeydown(ev.keyCode)
-    },
-    onkeyup: function (ev) {
-      if (this.game.onkeyup) this.game.onkeyup(ev.keyCode)
-    },
+    addEvents: function () {},
 
     hideCursor: function () {
       this.canvas.style.cursor = 'none'
