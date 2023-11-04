@@ -14,6 +14,7 @@ export default function PongPage() {
     setTimeout(() => {
       pong.startSinglePlayer()
     }, 200)
+    window.pongTest = pong
   }
   return (
     <>
