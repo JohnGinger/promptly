@@ -15,6 +15,7 @@ export default function PongPage() {
   };
 
   const startGame = () => {
+    // @ts-ignore
     let pong = window.Game.start('game', window.Pong, {
       sound: true,
       stats: false,

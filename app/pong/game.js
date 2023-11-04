@@ -79,8 +79,7 @@ Game = {
       Object.create &&
       Object.extend &&
       Function.bind &&
-      document.addEventListener && // HTML5 standard, all modern browsers that support canvas should also support add/removeEventListener
-      Game.ua.hasCanvas
+      document.addEventListener
     )
   },
 
@@ -88,35 +87,6 @@ Game = {
     if (Game.compatible())
       return Object.construct(Game.Runner, id, game, cfg).game // return the game instance, not the runner (caller can always get at the runner via game.runner)
   },
-
-  ua: (function () {
-    // should avoid user agent sniffing... but sometimes you just gotta do what you gotta do
-    var ua = navigator.userAgent.toLowerCase()
-    var key = ua.indexOf('opera') > -1 ? 'opera' : null
-    key = key || (ua.indexOf('firefox') > -1 ? 'firefox' : null)
-    key = key || (ua.indexOf('chrome') > -1 ? 'chrome' : null)
-    key = key || (ua.indexOf('safari') > -1 ? 'safari' : null)
-    key = key || (ua.indexOf('msie') > -1 ? 'ie' : null)
-
-    try {
-      var re = key == 'ie' ? 'msie (\\d)' : key + '\\/(\\d\\.\\d)'
-      var matches = ua.match(new RegExp(re, 'i'))
-      var version = matches ? parseFloat(matches[1]) : null
-    } catch (e) {}
-
-    return {
-      full: ua,
-      name: key + (version ? ' ' + version.toString() : ''),
-      version: version,
-      isFirefox: key == 'firefox',
-      isChrome: key == 'chrome',
-      isSafari: key == 'safari',
-      isOpera: key == 'opera',
-      isIE: key == 'ie',
-      hasCanvas: document.createElement('canvas').getContext,
-      hasAudio: typeof Audio != 'undefined'
-    }
-  })(),
 
   addEvent: function (obj, type, fn) {
     obj.addEventListener(type, fn, false)
