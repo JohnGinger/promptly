@@ -55,6 +55,7 @@ export default function Home() {
           image={'/images/pong.png'}
           link="/pong"
         />
+
         <Card
           title="MINESWEEPER"
           level="MEDIUM"
@@ -68,6 +69,13 @@ export default function Home() {
           description="- Prompt Claude to not get eaten by Pac-man."
           image={'/images/pacman.png'}
           link="/pacman"
+        />
+        <Card
+          title="HUMAN EVAL"
+          level="HARD"
+          description="- Prompt to solve problems that humans can solve but AI can't."
+          image={'/images/human_eval.png'}
+          link="/human-eval"
         />
       </div>
     </div>
