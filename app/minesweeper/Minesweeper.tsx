@@ -41,12 +41,13 @@ export default function MineSweeper({
         </div>
       )}
       <div className=" border-8 border-solid border-black flex flex-col w-[25rem]">
-        {board.map(row => {
+        {board.map((row: any[], i: number) => {
           return (
-            <div className="flex flex-row">
-              {row.map(cell => {
+            <div className="flex flex-row" key={i}>
+              {row.map((cell, i) => {
                 return (
                   <div
+                    key={i}
                     className="h-10 w-10 border border-solid border-black flex items-center justify-center"
                     style={{
                       backgroundImage:

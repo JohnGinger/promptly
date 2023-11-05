@@ -9,14 +9,14 @@ import { useEffect, useState } from 'react'
 import { LoadingSpinner } from '../LoadingSpinner'
 import { extractJSCode } from '../extractJSCode'
 
-function createMinesweeperBoard(size, numberOfMines) {
+function createMinesweeperBoard(size: number, numberOfMines: number) {
   // Initialize the board with 'unknown' and 'safe' for all cells
   let board = Array.from({ length: size }, () =>
     Array.from({ length: size }, () => ['unknown', 'safe'])
   )
 
   // Helper function to generate random integer within a range
-  function getRandomInt(max) {
+  function getRandomInt(max: number) {
     return Math.floor(Math.random() * Math.floor(max))
   }
 
@@ -36,16 +36,16 @@ function createMinesweeperBoard(size, numberOfMines) {
   return board
 }
 
-function countAdjacentMines(board) {
+function countAdjacentMines(board: any[]) {
   const size = board.length
 
   // Helper function to check if a given cell is within the grid bounds
-  function isInBounds(x, y) {
+  function isInBounds(x: number, y: number) {
     return x >= 0 && x < size && y >= 0 && y < size
   }
 
   // Helper function to count mines around a given cell
-  function countMines(x, y) {
+  function countMines(x: number, y: number) {
     const directions = [
       [-1, -1],
       [-1, 0],
@@ -86,7 +86,7 @@ function countAdjacentMines(board) {
   return board
 }
 
-function countFlaggedSquares(board) {
+function countFlaggedSquares(board: string | any[]) {
   let flaggedCount = 0
   for (let row = 0; row < board.length; row++) {
     for (let col = 0; col < board[row].length; col++) {
@@ -98,7 +98,7 @@ function countFlaggedSquares(board) {
   return flaggedCount
 }
 
-function gameWon(board) {
+function gameWon(board: string | any[]) {
   // Check if all mines are flagged
   let flaggedCount = countFlaggedSquares(board)
   if (flaggedCount !== 20) {
@@ -125,7 +125,9 @@ export default function MineSweeperPage() {
   const [loading, setLoading] = useState(false)
   const [response, setResponse] = useState('this is a great response')
   const [code, setCode] = useState('//this is great code')
-  const [board, setBoard] = useState(createMinesweeperBoard(10, 20))
+  const [board, setBoard] = useState<string[][][]>(
+    createMinesweeperBoard(10, 20)
+  )
   const [status, setStatus] = useState('playing')
   const [flagsRemaining, setFlagsRemaining] = useState(20)
 
@@ -198,12 +200,12 @@ export default function MineSweeperPage() {
                 <p className="text-black text-base  font-sans leading-normal">
                   You need to write a javascript function <b>body</b> with the
                   input <b>squares</b> This is an array of arrays of integers.
-                  e.g. [ [ ['unknown'], ['flagged'], [2], ... ], [ ['unknown'],
-                  ['flagged'], [2], ... ], ... [ [['unknown'], ['flagged'], [2],
+                  e.g. [ [ [&apos;unknown&apos;], [&apos;flagged&apos;], [2], ... ], [ [&apos;unknown&apos;],
+                  [&apos;flagged&apos;], [2], ... ], ... [ [[&apos;unknown&apos;], [&apos;flagged&apos;], [2],
                   ... ]] ]
                 </p>
                 <p>
-                  The function returns an array of the form [x, y, 'flag|click']
+                  The function returns an array of the form [x, y, &apos;flag|click&apos;]
                 </p>
               </div>
             }

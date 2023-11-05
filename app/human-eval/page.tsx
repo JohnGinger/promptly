@@ -13,7 +13,12 @@ export default function HumanEvalPage() {
   const [loading, setLoading] = useState(false)
   const [response, setResponse] = useState(null)
   const [code, setCode] = useState('')
-  const [testResults, setTestResults] = useState([null, null, null, null])
+  const [testResults, setTestResults] = useState<Array<boolean | null>>([
+    null,
+    null,
+    null,
+    null
+  ])
   const [testResponses, setTestResponses] = useState(['', '', '', ''])
   return (
     <div className="flex h-screen">
