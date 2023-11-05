@@ -1,13 +1,6 @@
-export const validateResponse = (completion: string) => {
-    
-    const containsFunction = checkForFunctionDefinition(completion);
-    if (containsFunction) return containsFunction;
-
-    const isPython = isLikelyPython(completion);
-    if (isPython) return isPython;
-
-    return '';
-  }
+export const validateResponse = (completion: string): string => {
+    return checkForFunctionDefinition(completion) || isLikelyPython(completion) || '';
+  };
 
 const checkForFunctionDefinition = (str: string) => {
     // Matches various function definitions including function declarations, function expressions, arrow functions, and shorthand method definitions
