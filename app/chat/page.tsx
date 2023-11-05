@@ -26,7 +26,10 @@ export default function ChatPage({
     let { completion } = await fetch('/api/chat', {
       method: 'POST',
       body: JSON.stringify({
-        message: newMessage
+        message: `
+        ${newMessage}
+        exlude the function definition, only include the body within the tags. Absolutely DO NOT include the function definition!
+        `
       }),
       headers: {
         'Content-type': 'application/json; charset=UTF-8'

@@ -79,6 +79,7 @@ export default function PongPage() {
                 </span>
               </div>
             }
+            idealPrompt={`Write me a js function that plays pong. if ball_y is above paddle_y, return 1, otherwise, if ball_y is below return -1, else return 0. You should include the code in between <javascript></javascript> tags, do not include the function definition, only the body`}
           />
         </div>
         <div className="w-1/2">

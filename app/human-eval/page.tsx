@@ -128,7 +128,30 @@ export default function HumanEvalPage() {
                 </p>
               </div>
             }
-            idealPrompt={`Write me a js function that plays pong. if ball_y is above paddle_y, return 1, otherwise, if ball_y is below return -1, else return 0. You should include the code in between <javascript></javascript> tags, do not include the function definition, only the body`}
+            idealPrompt={`Your goal is to write a function that accepts a list of strings as a parameter, deletes the strings that have odd lengths from it, and returns the resulted list with a sorted order,
+            The list is always a list of strings and never an array of numbers, and it may contain duplicates.
+            
+            The order of the list should be ascending by length of each word, and you should return the list sorted by that rule.
+            
+            If two words have the same length, sort the list alphabetically.
+            
+            The function should return a list of strings in sorted order, using standard compare, NOT localCompare.  Return uppercase BEFORE lowercase, all other things being equal.
+            
+            You may assume that all words will have the same length.
+            
+            For example: sorted_list_sum(["aa", "a", "aaa"]) => ["aa"] sorted_list_sum(["ab", "a", "aaa", "cd"]) => ["ab", "cd"]
+            
+            THE FOLLOWING TWO EXAMPLES ARE VERY IMPORTANT, IT MUST WORK FOR BOTH
+            sorted_list_sum(['aaaa', 'bbbb', 'dd', 'cc']) => ['cc','dd','aaaa','bbbb']
+            sorted_list_sum(['AI', 'ai', 'au']) => ['AI','ai','au']
+            
+            Implement the function in Javascript, bracketed in <javascript> tags. Only implement AND RETURN the function body. Pay very close attention to the next instruction: you MUST OMIT the function header, you must not return a variable.
+            
+            For example:
+            BAD:
+            let sortedList = list => { ...the_code }
+            GOOD:
+            return the_code`}
           />
         </div>
         <div className="w-1/2">
