@@ -57,14 +57,14 @@ export default function Home() {
         />
         <Card
           title="HUMAN EVAL"
-          level="MEDIUM"
+          level="HARD"
           description="- Prompt to solve problems that humans can solve but AI can't."
           image={'/images/human_eval.png'}
           link="/human-eval"
         />
         <Card
           title="MINESWEEPER"
-          level="HARD"
+          level="INSANE"
           description="- Prompt Claude to learn rules to play the game.."
           image={'/images/minesweeper.png'}
           link="/minesweeper"
