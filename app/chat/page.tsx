@@ -4,16 +4,20 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { validateResponse } from '@/lib/validation'
+import { LoadingSpinner } from '../LoadingSpinner'
 
 export default function ChatPage({
   setLoading,
   loading,
   message,
   beforeSend,
-  onResponse
+  onResponse,
+  idealPrompt
 }: any) {
   const [newMessage, setNewMessage] = useState('')
   const [hint, setHint] = useState('');
+  const [helpMessage, setHelpMessage] = useState('');
+  const [helpLoading, setHelpLoading] = useState(false);
 
   const sendMessage = async () => {
     beforeSend()
@@ -35,6 +39,33 @@ export default function ChatPage({
     } catch (e) {
       console.error(e)
       console.log('error parsing code')
+    }
+  }
+  const getHelpFromClaude = async () => {
+    setHelpLoading(true);
+    let { completion } = await fetch('/api/chat', {
+      method: 'POST',
+      body: JSON.stringify({
+        message: `
+          You are a professor and you want to help a student with their Cluade prompt engineering.
+          The student is using the following prompt:
+          <studentPrompt>${newMessage}</studentPrompt>
+          And here is a prompt that is not ideal, but gets the job done
+          <idealPrompt>${idealPrompt}</idealPrompt>
+          Please help the student by suggesting how they can get their closer to the ideal promp by giving hints.
+          Respond in less than two sentences.
+        `
+      }),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8'
+      }
+    }).then(x => x.json())
+    console.log('🚀 ~ file: page.tsx:59 ~ getHelpFromClaude ~ completion:', completion)
+    try {
+      setHelpMessage(completion);
+      setHelpLoading(false);
+    } catch (e) {
+      console.error(e)
     }
   }
 
@@ -84,12 +115,33 @@ export default function ChatPage({
           onClick={async () => {
             sendMessage()
           }}
-          className="bg-blue-500 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded "
+          className="bg-blue-500 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded mr-2"
           disabled={loading}
         >
           Generate Code
         </button>
       )}
+      {!loading && (
+        <button
+          onClick={async () => {
+            getHelpFromClaude()
+          }}
+          className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded "
+          disabled={loading}
+        >
+          I need help!
+        </button>
+      )}
+      {helpLoading && <LoadingSpinner />}
+      {helpMessage && 
+        <div className=" justify-start items-start gap-4 inline-flex mt-6">
+          <img className="h-14" src="/images/mascot.png" />
+          <div className="p-4 bg-teal-300 bg-opacity-40 justify-start items-start gap-4 flex">
+            {helpMessage}
+          </div>
+        </div>
+      }
     </div>
+    
   )
 }
