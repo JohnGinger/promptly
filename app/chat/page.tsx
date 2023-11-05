@@ -21,6 +21,8 @@ export default function ChatPage({
 
   const sendMessage = async () => {
     beforeSend()
+    setHint('');
+    setHelpMessage('');
     setLoading(true)
 
     let { completion } = await fetch('/api/chat', {
@@ -56,7 +58,7 @@ export default function ChatPage({
           And here is a prompt that is not ideal, but gets the job done
           <idealPrompt>${idealPrompt}</idealPrompt>
           Please help the student by suggesting how they can get their closer to the ideal promp by giving hints.
-          Respond in less than two sentences.
+          Respond in less than two sentences, you should reply as if you are directly talking to the student.
         `
       }),
       headers: {
