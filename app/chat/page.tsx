@@ -22,12 +22,7 @@ export default function ChatPage({
     let { completion } = await fetch('/api/chat', {
       method: 'POST',
       body: JSON.stringify({
-        message: `
-        <code>
-        
-        ${newMessage}
-  
-        `
+        message: newMessage
       }),
       headers: {
         'Content-type': 'application/json; charset=UTF-8'
