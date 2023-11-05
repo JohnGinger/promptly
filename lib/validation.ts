@@ -1,9 +1,6 @@
 export const validateResponse = (completion: string): string => {
   return (
-    checkForFunctionDefinition(completion) ||
-    isLikelyPython(completion) ||
-    checkForJavascriptTags(completion) ||
-    ''
+    checkForJavascriptTags(completion)
   )
 }
 
@@ -16,23 +13,21 @@ const checkForFunctionDefinition = (str: string) => {
     return 'Just the body of the function is needed, not the whole definition.'
   }
   return ''
-}
+};
 
 const checkForJavascriptTags = (str: string) => {
   // Matches if the string starts with <javascript> and ends with </javascript>
-  const javascriptTagPattern = /^\s*<javascript>\s*[\s\S]*<\/javascript>\s*$/i
-  if (!javascriptTagPattern.test(str)) {
+  const pattern = /<javascript>[\s\S]+?<\/javascript>/i;
+  if (!pattern.test(str)) {
     return 'The code should be enclosed within <javascript> tags.'
   }
   // Extract the code inside the <javascript> tags to pass it to other validation functions
-  const codeInsideTags = str.replace(
-    /^\s*<javascript>\s*|\s*<\/javascript>\s*$/gi,
-    ''
-  )
+  const matches = str.match(/<javascript>([\s\S]*?)<\/javascript>/);
+  const codeOnly = matches ? matches[1] : ''
   // Perform other validations on the extracted code
   return (
-    checkForFunctionDefinition(codeInsideTags) ||
-    isLikelyPython(codeInsideTags) ||
+    checkForFunctionDefinition(codeOnly) ||
+    isLikelyPython(codeOnly) ||
     ''
   )
 }
