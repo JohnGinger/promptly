@@ -202,9 +202,10 @@ Game = {
 
     loop: function () {
       var start = Game.timestamp()
-      this.update((start - this.lastFrame) / 1000.0) // send dt as seconds
+      let dt = (start - this.lastFrame) / 1000.0
+      this.update(dt) // send dt as seconds
       var middle = Game.timestamp()
-      this.draw()
+      this.draw(dt)
       var end = Game.timestamp()
       this.updateStats(middle - start, end - middle)
       this.lastFrame = start
@@ -214,9 +215,9 @@ Game = {
       this.game.update(dt)
     },
 
-    draw: function () {
+    draw: function (dt) {
       this.back2d.clearRect(0, 0, this.width, this.height)
-      this.game.draw(this.back2d)
+      this.game.draw(this.back2d, dt)
       this.drawStats(this.back2d)
       this.front2d.clearRect(0, 0, this.width, this.height)
       this.front2d.drawImage(this.back, 0, 0)

@@ -8,7 +8,13 @@ import { LoadingSpinner } from './LoadingSpinner'
 
 let pongInstance: any = null
 
-export default function PongGame({ loading }: { loading: boolean }) {
+export default function PongGame({
+  loading,
+  style
+}: {
+  loading: boolean
+  style: any
+}) {
   // @ts-ignore
   const [code, setCode] = useState()
 
@@ -47,20 +53,47 @@ export default function PongGame({ loading }: { loading: boolean }) {
   }, [loading])
 
   return (
-    <div className="flex flex-col mt-8">
-      <div className="flex flex-row justify-between pl-8 pr-8 align-middle items-center">
-        <div className="w-28 text-center text-black text-lg font-bold font-sans leading-snug">
-          You
+    <div className="flex flex-col mt-8" style={style}>
+      <div className="max-h-[480px] max-w-[600px]  ">
+        <div className="flex flex-row justify-between pl-8 pr-8 align-middle items-center ">
+          <div className="w-28 text-center text-black text-lg font-bold font-sans leading-snug">
+            You
+          </div>
+          <div className="w-28 text-center text-black text-lg font-bold font-sans leading-snug">
+            The Computer
+          </div>
         </div>
-        <div className="w-28 text-center text-black text-lg font-bold font-sans leading-snug">
-          The Computer
-        </div>
+        <canvas id="game" className="bg-black	m-4 " />
       </div>
-      <canvas id="game" className="bg-black	m-4" />
-      <div className="p-4">
-        <div className=" text-xl font-bold font-sans ">the generated code</div>
-        <CodeBlock text={code} language="javascript" showLineNumbers={false} />
-      </div>
+      {pongInstance !== null && <CodeBlockContainer code={code} />}
+    </div>
+  )
+}
+
+const CodeBlockContainer = ({ code }: { code?: string }) => {
+  return (
+    <div className="p-4">
+      {code && code?.length > 0 ? (
+        <>
+          {' '}
+          <div className=" text-xl font-bold font-sans ">
+            the generated code
+          </div>
+          <CodeBlock
+            text={code}
+            language="javascript"
+            showLineNumbers={false}
+          />
+        </>
+      ) : (
+        <>
+          <div className=" text-xl font-bold font-sans ">
+            We could not detect any code in the response below, be sure to ask
+            to return the code inside &lt;javascript&gt;&lt;/javascript&gt;
+          </div>
+          <pre>{pongInstance?.Response}</pre>
+        </>
+      )}
     </div>
   )
 }

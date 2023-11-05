@@ -18,7 +18,7 @@ export default function PongPage() {
         </div>
         <div className="w-1/2">
           {loading && <LoadingSpinner />}
-          <PongGame loading={loading} />
+          <PongGame loading={loading} style={{'visibility': loading ? 'hidden' : 'initial'}}/>
         </div>
       </NoSSR>
     </div>

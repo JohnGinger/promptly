@@ -138,13 +138,20 @@ Pong = {
     }
   },
 
-  draw: function (ctx) {
+  draw: function (ctx, dt) {
     this.court.draw(ctx, this.scores[0], this.scores[1])
     this.leftPaddle.draw(ctx)
     this.rightPaddle.draw(ctx)
-    let ball_positions = [[this.ball.x, this.ball.y]]
     let paddle_y = (this.leftPaddle.top + this.leftPaddle.bottom) / 2
-    let direction = this.pongAI(ball_positions, paddle_y) || 0
+    let direction =
+      this.pongAI(
+        this.ball.x,
+        this.ball.y,
+        this.ball.dx,
+        this.ball.dy,
+        dt,
+        paddle_y
+      ) || 0
     if (direction == 1) {
       this.leftPaddle.stopMovingDown()
       this.leftPaddle.moveUp()
@@ -160,22 +167,22 @@ Pong = {
     }
   },
   Code: `
-    // ball_positions is an array of ball positions in (x,y) co-ordinates, with the last element in the array being the current position
-  
-    // paddle_y is the y coordinate of the center of the paddle
-    
-    // This function returns either 
-    // 1 - the paddle should move up
-    // 0 - the paddle should stay where it is
-    // -1 - the paddle should move down
-    return 1
+    return 0 // your paddle doesn't move, this is unlikely to be a good strategy
   `,
 
-  pongAI: function pongAi(ball_positions, paddle_y) {
+  pongAI: function pongAi(ball_x, ball_y, ball_dx, ball_dy, ball_dt, paddle_y) {
     if (Pong.Code) {
       try {
-        let func = new Function('ball_positions', 'paddle_y', Pong.Code)
-        return func(ball_positions, paddle_y)
+        let func = new Function(
+          'ball_x',
+          'ball_y',
+          'ball_dx',
+          'ball_dy',
+          'ball_dt',
+          'paddle_y',
+          Pong.Code
+        )
+        return func(ball_x, ball_y, ball_dx, ball_dy, ball_dt, paddle_y)
       } catch (e) {
         console.log(e)
         return 0
