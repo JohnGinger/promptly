@@ -48,27 +48,29 @@ export default function PongPage() {
                   You need to write a javascript function <b>body</b> with the
                   following inputs:
                 </p>
-                <p>
+                <br/>
+                {/* <p>
                   <b>ball_x</b> The ball x position
-                </p>
+                </p> */}
                 <p>
                   <b>ball_y</b> The ball y position
                 </p>
-                <p>
+                {/* <p>
                   <b>ball_dx</b> The change in ball x position in the last time
                   step
                 </p>
                 <p>
                   <b>ball_dy</b> The change in ball y position in the last time
                   step
-                </p>
-                <p>
+                </p> */}
+                {/* <p>
                   <b>dt</b> The length of the last timestep
-                </p>
+                </p> */}
                 <p>
                   <b>paddle_y</b> is the y coordinate of the center of the
                   paddle
                 </p>
+                <br/>
                 <p>
                   The function returns either 1 - the paddle should move up 0 -
                   the paddle should stay where it is -1 - the paddle should move
