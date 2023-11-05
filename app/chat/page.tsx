@@ -3,6 +3,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import { validateResponse } from '@/lib/validation'
 
 export default function ChatPage({
   setLoading,
@@ -12,12 +13,11 @@ export default function ChatPage({
   onResponse
 }: any) {
   const [newMessage, setNewMessage] = useState('')
+  const [hint, setHint] = useState('');
 
   const sendMessage = async () => {
     beforeSend()
     setLoading(true)
-
- 
 
     let { completion } = await fetch('/api/chat', {
       method: 'POST',
@@ -29,6 +29,7 @@ export default function ChatPage({
       }
     }).then(x => x.json())
     try {
+      setHint(validateResponse(completion) ?? '');
       onResponse(completion)
       setLoading(false)
     } catch (e) {
@@ -50,6 +51,24 @@ export default function ChatPage({
           {message}
         </div>
       </div>
+      {hint &&
+        <div className="fixed bottom-5 left-5 w-full max-w-xs p-4 text-gray-500 bg-teal-300 rounded-lg shadow dark:bg-gray-800 dark:text-gray-400" role="alert">
+            <div className="flex">
+                <img className="w-8 h-8 rounded-full shadow-lg" src="/images/mascot.png" alt="Promptly"/>
+                <div className="ml-3 text-sm font-normal">
+                    <span className="mb-1 text-sm font-semibold text-gray-900 dark:text-white">Promptly</span>
+                    <div className="mb-2 text-sm font-normal">{hint}</div> 
+                </div>
+                <button type="button" className="ml-auto -mx-1.5 -my-1.5 bg-white justify-center items-center flex-shrink-0 text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700" data-dismiss-target="#toast-message-cta" aria-label="Close" onClick={() => setHint('')}>
+                    <span className="sr-only">Close</span>
+                    <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+      }
       <div>
         <textarea
           onChange={e => setNewMessage(e.target.value)}
