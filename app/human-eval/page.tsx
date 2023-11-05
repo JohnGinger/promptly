@@ -27,29 +27,63 @@ export default function HumanEvalPage() {
           <Chat
             setLoading={setLoading}
             loading={loading}
-            beforeSend={() => {}}
+            beforeSend={() => {
+              setTestResponses([])
+              setTestResults([])
+            }}
             onResponse={(completion: any) => {
               setResponse(completion)
               const parsed = extractJSCode(completion)
               console.log('parsed', parsed)
               setCode(parsed)
               try {
-                let func = new Function('a', 'b', parsed)
+                let func = new Function('list', parsed)
+
+// Your goal is to write a function that accepts a list of strings as a parameter, deletes the strings that have odd lengths from it, and returns the resulted list with a sorted order,
+// The list is always a list of strings and never an array of numbers, and it may contain duplicates.
+
+// The order of the list should be ascending by length of each word, and you should return the list sorted by that rule.
+
+// If two words have the same length, sort the list alphabetically.
+
+// The function should return a list of strings in sorted order, using standard compare, NOT localCompare.  Return uppercase BEFORE lowercase, all other things being equal.
+
+// You may assume that all words will have the same length.
+
+// For example: sorted_list_sum(["aa", "a", "aaa"]) => ["aa"] sorted_list_sum(["ab", "a", "aaa", "cd"]) => ["ab", "cd"]
+
+// THE FOLLOWING TWO EXAMPLES ARE VERY IMPORTANT, IT MUST WORK FOR BOTH
+// sorted_list_sum(['aaaa', 'bbbb', 'dd', 'cc']) => ['cc','dd','aaaa','bbbb']
+// sorted_list_sum(['AI', 'ai', 'au']) => ['AI','ai','au']
+
+// Implement the function in Javascript, bracketed in <javascript> tags. Only implement AND RETURN the function body. Pay very close attention to the next instruction: you MUST OMIT the function header, you must not return a variable.
+
+// For example:
+// BAD:
+// let sortedList = list => { ...the_code }
+// GOOD:
+// return the_code
 
                 let responses = [
-                  func(2, 10),
-                  func(10, 2),
-                  func(132, 2),
-                  func(17, 89)
+                  func(["aa", "a", "aaa"]),
+                  func(["school", "AI", "asdf", "b"]),
+                  func(["d", "b", "c", "a"]),
+                  func(["d", "dcba", "abcd", "a"]),
+                  func(["AI", "ai", "au"]),
+                  func(["a", "b", "b", "c", "c", "a"]),
+                  func(['aaaa', 'bbbb', 'dd', 'cc'])
                 ]
                 console.log('responses', responses)
                 setTestResponses(responses.map(x => x.join(',')))
 
                 setTestResults([
-                  responses[0].join('') === '2468',
-                  responses[1].join('') === '2468',
-                  responses[2].join('') === '2468',
-                  responses[3].join('') === ''
+                  responses[0].join(',') === 'aa',
+                  responses[1].join(',') === 'AI,asdf,school',
+                  responses[2].join(',') === '',
+                  responses[3].join(',') === 'abcd,dcba',
+                  responses[4].join(',') === 'AI,ai,au',
+                  responses[5].join(',') === '',
+                  responses[6].join(',') === 'cc,dd,aaaa,bbbb'
                 ])
               } catch (e) {
                 console.warn(e)
@@ -65,13 +99,22 @@ export default function HumanEvalPage() {
                 </span>
                 <span className="text-black text-base font-normal font-sans leading-normal">
                   {' '}
-                  is when given two positive integers a and b, return the even
-                  digits between a and b, in ascending order.
-                </span>
-                <p>For example:</p>
-                <p>generate_integers(2, 8) =&gt; [2, 4, 6, 8]</p>
-                <p>generate_integers(8, 2) =&gt; [2, 4, 6, 8]</p>
-                <p>generate_integers(10, 14) =&gt; [] </p>
+                  is to write a function that accepts a list of strings as a parameter, 
+    deletes the strings that have odd lengths from it,
+    and returns the resulted list with a sorted order,
+    </span>
+    <p>
+    The list is always a list of strings and never an array of numbers,
+    and it may contain duplicates. </p>
+    <p>The order of the list should be ascending by length of each word, and you 
+    should return the list sorted by that rule.</p>
+    <p>If two words have the same length, sort the list alphabetically.</p>
+    <p>The function should return a list of strings in sorted order.</p>
+    <p>You may assume that all words will have the same length.</p>
+    <p>For example:
+    sorted_list_sum([&quot;aa&quot;, &quot;a&quot;, &quot;aaa&quot;]) =&gt; [&quot;aa&quot;] 
+    sorted_list_sum([&quot;ab&quot;, &quot;a&quot;, &quot;aaa&quot;, &quot;cd&quot;]) =&gt; [&quot;ab&quot;, &quot;cd&quot;]</p>
+ 
               </div>
             }
           />
