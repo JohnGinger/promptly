@@ -51,21 +51,21 @@ export default function Home() {
         <Card
           title="PONG"
           level="EASY"
-          description="- Prompt Claude to move the pong bat up and down the screen."
+          description=" - Prompt Claude to move the pong bat up and down the screen."
           image={'/images/pong.png'}
           link="/pong"
         />
         <Card
           title="HUMAN EVAL"
           level="HARD"
-          description="- Prompt to solve problems that humans can solve but AI can't."
+          description=" - Prompt to solve problems that humans can solve but AI can't."
           image={'/images/human_eval.png'}
           link="/human-eval"
         />
         <Card
           title="MINESWEEPER"
           level="INSANE"
-          description="- Prompt Claude to learn rules to play the game.."
+          description=" - Prompt Claude to learn rules to play the game.."
           image={'/images/minesweeper.png'}
           link="/minesweeper"
         />
