@@ -9,6 +9,7 @@
  */
 
 export interface Env {
+	ANTHROPIC_API_KEY: string
 	// Example binding to KV. Learn more at https://developers.cloudflare.com/workers/runtime-apis/kv/
 	// MY_KV_NAMESPACE: KVNamespace;
 	//
@@ -24,9 +25,27 @@ export interface Env {
 	// Example binding to a Queue. Learn more at https://developers.cloudflare.com/queues/javascript-apis/
 	// MY_QUEUE: Queue;
 }
+import Anthropic from '@anthropic-ai/sdk'
+
+
+
+export async function POST(req: Request) {
+  
+}
 
 export default {
 	async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
-		return new Response('Hello World!');
+		const anthropic = new Anthropic({
+			apiKey: env['ANTHROPIC_API_KEY']
+		  })
+
+		const { message } = await request.json<{message:string}>()
+		const completion = await anthropic.completions.create({
+		  model: 'claude-2',
+		  max_tokens_to_sample: 10000,
+		  prompt: `${Anthropic.HUMAN_PROMPT} ${message} ${Anthropic.AI_PROMPT}`
+		})
+	  
+		return new Response(JSON.stringify(completion))
 	},
 };

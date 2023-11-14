@@ -25,7 +25,7 @@ export default function ChatPage({
     setHelpMessage('');
     setLoading(true)
 
-    let { completion } = await fetch('/api/chat', {
+    let { completion } = await fetch('https://promptme-worker.promptme.workers.dev/', {
       method: 'POST',
       body: JSON.stringify({
         message: `
@@ -48,7 +48,7 @@ export default function ChatPage({
   }
   const getHelpFromClaude = async () => {
     setHelpLoading(true);
-    let { completion } = await fetch('/api/chat', {
+    let { completion } = await fetch('https://promptme-worker.promptme.workers.dev/', {
       method: 'POST',
       body: JSON.stringify({
         message: `
