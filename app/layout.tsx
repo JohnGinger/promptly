@@ -5,12 +5,12 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Promptly',
-  description: 'Learn how to prompt with promptly',
+  title: 'promptme',
+  description: 'Learn how to prompt with promptme'
 }
 
 export default function RootLayout({
-  children,
+  children
 }: {
   children: React.ReactNode
 }) {

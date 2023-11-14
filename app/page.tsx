@@ -39,7 +39,7 @@ export default function Home() {
             Learn the future of programming with{' '}
           </span>
           <span className="text-teal-300 text-5xl font-bold font-sans leading-10">
-            promptly
+            promptme
           </span>
         </div>
         <img className="w-32" src="/images/mascot.png" />
@@ -76,7 +76,6 @@ export default function Home() {
           image={'/images/pacman.png'}
           link="/pacman"
         /> */}
-        
       </div>
     </div>
   )
