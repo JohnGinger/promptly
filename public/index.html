@@ -1,37 +1,67 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html>
-<head>
-  <title>Pong!</title> 
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/> 
-  <link href="pong.css" media="screen, print" rel="stylesheet" type="text/css" /> 
-</head> 
- 
-<body> 
+  <head>
+    <!-- Hotjar Tracking Code for https://www.trypromptme.com/ -->
+    <script>
+      ;(function (h, o, t, j, a, r) {
+        h.hj =
+          h.hj ||
+          function () {
+            ;(h.hj.q = h.hj.q || []).push(arguments)
+          }
+        h._hjSettings = { hjid: 3745393, hjsv: 6 }
+        a = o.getElementsByTagName('head')[0]
+        r = o.createElement('script')
+        r.async = 1
+        r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv
+        a.appendChild(r)
+      })(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=')
+    </script>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-8121SQR4CB"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || []
+      function gtag() {
+        dataLayer.push(arguments)
+      }
+      gtag('js', new Date())
 
+      gtag('config', 'G-8121SQR4CB')
+    </script>
 
-  <canvas id="game">
-    <div id="unsupported">
-      Sorry, this example cannot be run because your browser does not support the &lt;canvas&gt; element
-    </div>
-  </canvas>
+    <title>Pong!</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link
+      href="pong.css"
+      media="screen, print"
+      rel="stylesheet"
+      type="text/css"
+    />
+  </head>
 
-  <script src="game.js" type="text/javascript"></script> 
-  <script src="pong.js" type="text/javascript"></script>
-  <script src="main.js" type="text/javascript"></script>
-  <script type="text/javascript">
-  Game.ready(function() {
+  <body>
+    <canvas id="game">
+      <div id="unsupported">
+        Sorry, this example cannot be run because your browser does not support
+        the &lt;canvas&gt; element
+      </div>
+    </canvas>
 
-
-    var pong = Game.start('game', Pong, {
-      sound:       true,
-      stats:      true,
-      footprints:  false,
-      predictions: false
-    });
-
-
-  });
-  </script>
-
-</body> 
+    <script src="game.js" type="text/javascript"></script>
+    <script src="pong.js" type="text/javascript"></script>
+    <script src="main.js" type="text/javascript"></script>
+    <script type="text/javascript">
+      Game.ready(function () {
+        var pong = Game.start('game', Pong, {
+          sound: true,
+          stats: true,
+          footprints: false,
+          predictions: false
+        })
+      })
+    </script>
+  </body>
 </html>
