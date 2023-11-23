@@ -249,7 +249,7 @@ Pong = {
   Sounds: {
     initialize: function (pong) {
       this.game = pong
-      this.supported = true
+      this.supported = false
       if (this.supported) {
         this.files = {
           ping: Game.createAudio('sounds/ping.wav'),

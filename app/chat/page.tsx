@@ -5,6 +5,8 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { validateResponse } from '@/lib/validation'
 import { LoadingSpinner } from '../LoadingSpinner'
+import { extractJSCode } from '../extractJSCode'
+import { PromptEngineeringHints } from '../PromptEngineeringHints'
 
 export default function ChatPage({
   setLoading,
@@ -18,6 +20,7 @@ export default function ChatPage({
   const [hint, setHint] = useState('')
   const [helpMessage, setHelpMessage] = useState('')
   const [helpLoading, setHelpLoading] = useState(false)
+  const [completion, setCompletion] = useState('')
 
   const sendMessage = async () => {
     beforeSend()
@@ -29,8 +32,7 @@ export default function ChatPage({
       method: 'POST',
       body: JSON.stringify({
         message: `
-        ${newMessage}
-        exlude the function definition, only include the body within the tags. Absolutely DO NOT include the function definition!
+        ${newMessage} . When responding please exclude the function definition, and only include the body, without the enclosing braces. Absolutely DO NOT include the function definition! Any other text should be as a comment 
         `
       }),
       headers: {
@@ -40,6 +42,8 @@ export default function ChatPage({
     try {
       setHint(validateResponse(completion) ?? '')
       onResponse(completion)
+      setCompletion(completion)
+
       setLoading(false)
     } catch (e) {
       console.error(e)
@@ -52,12 +56,12 @@ export default function ChatPage({
       method: 'POST',
       body: JSON.stringify({
         message: `
-          You are a professor and you want to help a student with their Cluade prompt engineering.
+          You are a professor and you want to help a student with their Claude prompt engineering.
           The student is using the following prompt:
           <studentPrompt>${newMessage}</studentPrompt>
           And here is a prompt that is not ideal, but gets the job done
           <idealPrompt>${idealPrompt}</idealPrompt>
-          Please help the student by suggesting how they can get their closer to the ideal promp by giving hints.
+          Please help the student by suggesting how they can get their closer to the ideal prompt by giving hints.
           Respond in less than two sentences, you should reply as if you are directly talking to the student.
         `
       }),
@@ -74,15 +78,19 @@ export default function ChatPage({
   }
 
   return (
-    <div className="p-8">
+    <div
+      className="p-8"
+      style={{
+        backgroundColor: '#F0F7F6'
+      }}
+    >
       <Link href="/">
-        <div className="text-left text-teal-300 text-5xl font-bold font-sans leading-10 mb-6">
+        <div className="text-left text-teal-300 text-5xl font-bold font-sans leading-10 mb-6 pl-3">
           promptme
         </div>
       </Link>
-      <div className=" justify-start items-start gap-4 inline-flex mb-6">
-        <img className="h-14" src="/images/mascot.png" />
-        <div className="p-4 bg-teal-300 bg-opacity-40 justify-start items-start gap-4 flex">
+      <div className=" justify-start items-start inline-flex mb-6">
+        <div className="p-4   justify-start items-start gap-4 flex">
           {message}
         </div>
       </div>
@@ -130,39 +138,61 @@ export default function ChatPage({
           </div>
         </div>
       )}
-      <div>
+      <div className="flex relative flex-col ">
+        <div className="bg-teal-300 p-2 text-white font-bold pl-4">
+          Type your prompt to generate code in the box below
+        </div>
         <textarea
+          className="min-h-[25em] border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 mb-4 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 p-4 bg-white bg-opacity-40 justify-start items-start gap-4 flex  z-10"
           onChange={e => setNewMessage(e.target.value)}
           readOnly={loading}
           id="message"
-          className="bg-gray-50 min-h-[25em] border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 mb-4 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          placeholder="Enter your prompt here"
+          placeholder="This gets sent to directly to claude, it doesn't know the question you have been asked to solve"
         />
       </div>
 
-      {!loading && (
-        <button
-          onClick={async () => {
-            sendMessage()
-          }}
-          className="bg-blue-500 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded mr-2"
-          disabled={loading}
-        >
-          Generate Code
-        </button>
+      <div className="w-full flex">
+        {!loading && (
+          <button
+            onClick={async () => {
+              sendMessage()
+            }}
+            className="bg-blue-500 hover:bg-teal-300 text-white font-bold py-2 px-4 rounded mr-2 flex-grow"
+            disabled={loading}
+          >
+            Generate Code
+          </button>
+        )}
+        {!loading && (
+          <button
+            onClick={async () => {
+              getHelpFromClaude()
+            }}
+            className="bg-slate-400 hover:bg-teal-300 text-white font-bold py-2 px-4 rounded "
+            disabled={loading}
+          >
+            I need help!
+          </button>
+        )}
+      </div>
+      <PromptEngineeringHints />
+      {completion && !loading && (
+        <div className="mt-4 mb-4 border-black bg-white">
+          <div className="bg-teal-300 p-2 text-white font-bold pl-4">
+            This is the response from the AI
+          </div>
+          <div className="p-4  bg-slate-300 justify-start items-start gap-4 flex">
+            <pre
+              style={{
+                whiteSpace: 'pre-wrap'
+              }}
+            >
+              {completion}
+            </pre>
+          </div>
+        </div>
       )}
-      {!loading && (
-        <button
-          onClick={async () => {
-            getHelpFromClaude()
-          }}
-          className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded "
-          disabled={loading}
-        >
-          I need help!
-        </button>
-      )}
-      {helpLoading && <LoadingSpinner />}
+
       {helpMessage && (
         <div className=" justify-start items-start gap-4 inline-flex mt-6">
           <img className="h-14" src="/images/mascot.png" />

@@ -56,19 +56,18 @@ export default function PongGame({
 
   return (
     <div className="flex flex-col mt-8" style={style}>
+       <div className="text-left text-teal-300 text-5xl font-bold font-sans leading-10 mb-6 pl-6 ">
+          simulator
+        </div>
       <div className="flex flex-row justify-between pl-8 pr-8 align-middle items-center ">
-        <div className="w-28 text-center text-black text-lg font-bold font-sans leading-snug">
+        <div className="text-center text-black text-lg font-bold font-sans leading-snug">
           You
         </div>
-        <div className="w-28 text-center text-black text-lg font-bold font-sans leading-snug">
+        <div className=" text-center text-black text-lg font-bold font-sans leading-snug">
           The Computer
         </div>
       </div>
       <canvas id="game" className="bg-black	m-4 " />
-      {pongInstance !== null && (
-        <CodeBlockContainer code={code} response={pongInstance.Response} />
-      )}
-      <PromptEngineeringHints />
     </div>
   )
 }

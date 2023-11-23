@@ -12,9 +12,9 @@ import { extractJSCode } from '../extractJSCode'
 export default function PongPage() {
   const [loading, setLoading] = useState(false)
   return (
-    <div className="flex h-screen">
+    <div className="flex flex-col">
       <NoSSR>
-        <div className="w-1/2">
+        <div className="w-full">
           <Chat
             setLoading={setLoading}
             loading={loading}
@@ -27,9 +27,8 @@ export default function PongPage() {
             onResponse={(completion: any) => {
               // @ts-ignore
               window.Pong.Response = completion
-              const parsed = extractJSCode(completion)
               // @ts-ignore
-              window.Pong.Code = parsed
+              window.Pong.Code = completion
             }}
             message={
               <div className="grow shrink basis-0">
@@ -76,15 +75,12 @@ export default function PongPage() {
                   the paddle should stay where it is -1 - the paddle should move
                   down
                 </p>
-                <span className="text-black text-base font-normal font-sans leading-normal">
-                  May the best prompt win.
-                </span>
               </div>
             }
             idealPrompt={`Write me a js function that plays pong. if ball_y is above paddle_y, return 1, otherwise, if ball_y is below return -1, else return 0. You should include the code in between <javascript></javascript> tags, do not include the function definition, only the body`}
           />
         </div>
-        <div className="w-1/2">
+        <div className="w-full">
           {loading && <LoadingSpinner />}
           <PongGame
             loading={loading}

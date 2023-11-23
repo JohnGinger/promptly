@@ -35,6 +35,10 @@ export async function POST(req: Request) {}
 
 export default {
 	async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
+
+		// let origin =  'https://www.trypromptme.com'
+
+	
 		const CORS_HEADERS = {
 			'Access-Control-Allow-Origin': 'https://www.trypromptme.com',
 			'Access-Control-Allow-Methods': 'GET,HEAD,POST,OPTIONS',
