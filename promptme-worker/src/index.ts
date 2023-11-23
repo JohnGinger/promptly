@@ -10,6 +10,10 @@
 
 export interface Env {
 	ANTHROPIC_API_KEY: string;
+	ANTHROPIC_API_KEY_FREE_ONE: string;
+	ANTHROPIC_API_KEY_FREE_TWO: string;
+	ANTHROPIC_API_KEY_FREE_THREE: string;
+
 	// Example binding to KV. Learn more at https://developers.cloudflare.com/workers/runtime-apis/kv/
 	// MY_KV_NAMESPACE: KVNamespace;
 	//
@@ -36,21 +40,49 @@ export default {
 			'Access-Control-Allow-Methods': 'GET,HEAD,POST,OPTIONS',
 			'Access-Control-Allow-Headers': 'Content-Type',
 		};
+
 		if (request.method == 'OPTIONS') {
 			return new Response('', {
 				headers: CORS_HEADERS,
 			});
 		}
+
+		let free_keys = [env.ANTHROPIC_API_KEY_FREE_ONE, env.ANTHROPIC_API_KEY_FREE_TWO, env.ANTHROPIC_API_KEY_FREE_THREE];
+
+		free_keys.sort(() => Math.random() - 0.5);
+
+		for (let key of free_keys) {
+			try {
+				const anthropic = new Anthropic({
+					apiKey: key,
+				});
+
+				const { message } = await request.json<{ message: string }>();
+				const completion = await anthropic.completions.create({
+					model: 'claude-2',
+					max_tokens_to_sample: 1000,
+					prompt: `${Anthropic.HUMAN_PROMPT} ${message} ${Anthropic.AI_PROMPT}`,
+				});
+				console.log('Used free key')
+				return new Response(JSON.stringify(completion), {
+					headers: CORS_HEADERS,
+				});
+			} catch (e) {
+				console.log('do nothing');
+			}
+		}
+
 		const anthropic = new Anthropic({
-			apiKey: env['ANTHROPIC_API_KEY'],
+			apiKey: env.ANTHROPIC_API_KEY,
 		});
 
 		const { message } = await request.json<{ message: string }>();
 		const completion = await anthropic.completions.create({
 			model: 'claude-2',
-			max_tokens_to_sample: 10000,
+			max_tokens_to_sample: 1000,
 			prompt: `${Anthropic.HUMAN_PROMPT} ${message} ${Anthropic.AI_PROMPT}`,
 		});
+		console.log('Used paid key')
 
 		return new Response(JSON.stringify(completion), {
 			headers: CORS_HEADERS,
