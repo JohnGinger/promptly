@@ -31,7 +31,7 @@ export default function HumanEval({
   // assert candidate(['aaaa', 'bbbb', 'dd', 'cc']) == ["cc", "dd", "aaaa", "bbbb"]
 
   return (
-    <div className="flex flex-col mt-8" style={style}>
+    <div className="flex flex-col mt-8 p-10" style={style}>
       <div className=" text-xl font-bold font-sans mt-4">Test results</div>
       <div className="mb-2">
         sorted_list_sum([&quot;aa&quot;, &quot;a&quot;, &quot;aaa&quot;]){' '}

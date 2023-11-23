@@ -62,10 +62,6 @@ export default function MineSweeper({
           )
         })}
       </div>
-
-      {response !== null && (
-        <CodeBlockContainer code={code} response={response} />
-      )}
     </div>
   )
 }

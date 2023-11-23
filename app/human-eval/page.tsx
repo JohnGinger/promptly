@@ -21,9 +21,9 @@ export default function HumanEvalPage() {
   ])
   const [testResponses, setTestResponses] = useState(['', '', '', ''])
   return (
-    <div className="flex h-screen">
+    <div className="flex flex-col">
       <NoSSR>
-        <div className="w-1/2">
+        <div >
           <Chat
             setLoading={setLoading}
             loading={loading}
@@ -154,7 +154,7 @@ export default function HumanEvalPage() {
             return the_code`}
           />
         </div>
-        <div className="w-1/2">
+        <div >
           {loading && <LoadingSpinner />}
           <HumanEval
             response={response}

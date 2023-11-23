@@ -138,9 +138,9 @@ export default function MineSweeperPage() {
   }, [code])
 
   return (
-    <div className="flex h-screen">
+    <div className="flex flex-col">
       <NoSSR>
-        <div className="w-1/2">
+        <div>
           <Chat
             setLoading={setLoading}
             loading={loading}
@@ -211,7 +211,7 @@ export default function MineSweeperPage() {
             }
           />
         </div>
-        <div className="w-1/2">
+        <div>
           {loading && <LoadingSpinner />}
           <MineSweeper
             response={response}
