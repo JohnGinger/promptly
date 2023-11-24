@@ -63,7 +63,7 @@ export default {
 
 				const { message } = await request.json<{ message: string }>();
 				const completion = await anthropic.completions.create({
-					model: 'claude-2',
+					model: 'claude-2.1',
 					max_tokens_to_sample: 1000,
 					prompt: `${Anthropic.HUMAN_PROMPT} ${message} ${Anthropic.AI_PROMPT}`,
 				});
@@ -82,7 +82,7 @@ export default {
 
 		const { message } = await request.json<{ message: string }>();
 		const completion = await anthropic.completions.create({
-			model: 'claude-2',
+			model: 'claude-2.1',
 			max_tokens_to_sample: 1000,
 			prompt: `${Anthropic.HUMAN_PROMPT} ${message} ${Anthropic.AI_PROMPT}`,
 		});
