@@ -27,6 +27,7 @@ export default function RootLayout({
           gtag('config', 'G-8121SQR4CB');
         `}
       </Script>
+      <Script src="https://static.hotjar.com/c/hotjar-3745393.js?sv=6" />
 
       <body className={inter.className}>{children}</body>
     </html>
