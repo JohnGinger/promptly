@@ -1,14 +1,36 @@
 'use client'
 import React, { useState } from 'react'
 
+const Arrow = ({ rotate }: { rotate: boolean }) => {
+  return (
+    <svg
+      className={`w-6 h-6 hover:scale-110 transition-all ${
+        rotate && 'rotate-180'
+      } `}
+      aria-hidden="true"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 14 8"
+    >
+      <path
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="m1 1 5.326 5.7a.909.909 0 0 0 1.348 0L13 1"
+      />
+    </svg>
+  )
+}
+
 export const PromptEngineeringHints = () => {
   const [expanded, setExpanded] = useState(false)
   return (
     <div>
-      <div className="bg-slate-400  text-white font-bold pl-4 mt-2 flex">
-        <div className='flex-grow p-2 pl-0'>9 hints to prompt engineering</div>
-        <button onClick={() => setExpanded(!expanded)} className='hover:bg-teal-400 p-2'>
-          {expanded ? 'Hide' : 'Show'}
+      <div className=" text-black font-bold pl-4 mt-2 flex">
+        <div className="flex-grow p-2 pl-0">9 hints to prompt engineering</div>
+        <button onClick={() => setExpanded(!expanded)} className=" p-2	">
+          <Arrow rotate={expanded} />
         </button>
       </div>
       {expanded && (

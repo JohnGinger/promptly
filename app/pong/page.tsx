@@ -12,7 +12,7 @@ import { extractJSCode } from '../extractJSCode'
 export default function PongPage() {
   const [loading, setLoading] = useState(false)
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col lg:flex-row">
       <NoSSR>
         <div className="w-full">
           <Chat
