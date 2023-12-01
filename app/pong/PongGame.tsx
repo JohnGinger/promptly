@@ -61,6 +61,7 @@ export default function PongGame({
       </div>
       <div className="flex flex-row justify-between pl-8 pr-8 align-middle items-center ">
         <button
+          // @ts-ignore
           onClick={() => window.pongInstance.startSinglePlayer()}
           className="btn"
         >

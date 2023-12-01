@@ -17,14 +17,14 @@ export default function ChatPage({
   idealPrompt
 }: any) {
   const [newMessage, setNewMessage] = useState('')
-  const [hint, setHint] = useState('')
+  // const [hint, setHint] = useState('')
   const [helpMessage, setHelpMessage] = useState('')
   const [helpLoading, setHelpLoading] = useState(false)
   const [completion, setCompletion] = useState('')
 
   const sendMessage = async () => {
     beforeSend()
-    setHint('')
+    // setHint('')
     setHelpMessage('')
     setLoading(true)
 
@@ -40,7 +40,7 @@ export default function ChatPage({
       }
     }).then(x => x.json())
     try {
-      setHint(validateResponse(completion) ?? '')
+      // setHint(validateResponse(completion) ?? '')
       onResponse(completion)
       setCompletion(completion)
 
@@ -94,7 +94,7 @@ export default function ChatPage({
           {message}
         </div>
       </div>
-      {hint && (
+      {/* {hint && (
         <div
           className="fixed bottom-5 left-5 w-full max-w-xs p-4 text-gray-500 bg-teal-300 rounded-lg shadow dark:bg-gray-800 dark:text-gray-400"
           role="alert"
@@ -109,9 +109,9 @@ export default function ChatPage({
               <span className="mb-1 text-sm font-semibold text-gray-900 dark:text-white">
                 promptme
               </span>
-              <div className="mb-2 text-sm font-normal">{hint}</div>
+              { <div className="mb-2 text-sm font-normal">{hint}</div> }
             </div>
-            <button
+            { <button
               type="button"
               className="ml-auto -mx-1.5 -my-1.5 bg-white justify-center items-center flex-shrink-0 text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
               data-dismiss-target="#toast-message-cta"
@@ -134,10 +134,10 @@ export default function ChatPage({
                   d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
                 />
               </svg>
-            </button>
+            </button>}
           </div>
         </div>
-      )}
+      )} */}
       <div className="flex relative flex-col ">
         <div className="bg-teal-300 p-2 text-white font-bold pl-4">
           Type your prompt to generate code in the box below
