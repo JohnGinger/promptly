@@ -1,5 +1,6 @@
 'use client'
 import React, { useState } from 'react'
+import { Info } from '@phosphor-icons/react'
 
 const Arrow = ({ rotate }: { rotate: boolean }) => {
   return (
@@ -28,7 +29,9 @@ export const PromptEngineeringHints = () => {
   return (
     <div>
       <div className=" text-black font-bold pl-4 mt-2 flex">
-        <div className="flex-grow p-2 pl-0">Prompting Tips</div>
+        <div className="flex flex-row flex-grow p-2 pl-0 align-middle gap-2">
+          <Info /> Prompting Tips{' '}
+        </div>
         <button onClick={() => setExpanded(!expanded)} className=" p-2	">
           <Arrow rotate={expanded} />
         </button>
