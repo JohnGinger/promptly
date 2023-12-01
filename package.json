@@ -41,6 +41,7 @@
     "react-code-blocks": "^0.1.4",
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.4.1",
+    "react-hotjar": "^6.1.0",
     "react-intersection-observer": "^9.4.4",
     "react-markdown": "^8.0.7",
     "react-no-ssr": "^1.1.0",

@@ -1,5 +1,8 @@
+'use client'
 import Image from 'next/image'
 import Link from 'next/link'
+import { hotjar } from 'react-hotjar'
+import { useEffect } from 'react'
 
 type CardProps = {
   title: string
@@ -31,6 +34,10 @@ const Card = ({ title, level, description, image, link }: CardProps) => {
 }
 
 export default function Home() {
+  useEffect(() => {
+    hotjar.initialize(3745393, 6)
+  }, [])
+
   return (
     <div className=" bg-white flex flex-col h-screen content-center ml-auto mr-auto p-8 flex-nowrap w-[40em]">
       <div className="flex flex-row">
