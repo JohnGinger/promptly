@@ -32,22 +32,15 @@ export default function PongPage() {
             }}
             message={
               <div className="grow shrink basis-0">
-                <span className="text-black text-base font-normal font-sans leading-normal">
-                  Your{' '}
-                </span>
-                <span className="text-black text-base font-bold font-sans leading-normal">
-                  goal
-                </span>
-                <span className="text-black text-base font-normal font-sans leading-normal">
-                  {' '}
-                  is to prompt the paddle up or down and win against the
-                  computer.{' '}
-                </span>
-                <p className="text-black text-base  font-sans leading-normal">
-                  You need to write a javascript function <b>body</b> with the
-                  following inputs:
+                <p className="text-black text-2xl font-bold font-sanas leading-9">
+                  to win a game of pong
                 </p>
-                <br/>
+                <br />
+                <p className="text-black text-base  font-sans leading-normal">
+                  Write a prompt that will make claude describe a function body
+                  to move the paddle up or down, keep in mind:
+                </p>
+                <br />
                 {/* <p>
                   <b>ball_x</b> The ball x position
                 </p> */}
@@ -69,7 +62,7 @@ export default function PongPage() {
                   <b>paddle_y</b> is the y coordinate of the center of the
                   paddle
                 </p>
-                <br/>
+                <br />
                 <p>
                   The function returns either 1 - the paddle should move up 0 -
                   the paddle should stay where it is -1 - the paddle should move
