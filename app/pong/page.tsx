@@ -47,14 +47,14 @@ export default function PongPage() {
                 <p>
                   <b>ball_y</b> The ball y position
                 </p>
-                {/* <p>
+                <p>
                   <b>ball_dx</b> The change in ball x position in the last time
                   step
                 </p>
                 <p>
                   <b>ball_dy</b> The change in ball y position in the last time
                   step
-                </p> */}
+                </p>
                 {/* <p>
                   <b>dt</b> The length of the last timestep
                 </p> */}

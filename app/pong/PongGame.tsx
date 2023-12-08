@@ -7,6 +7,7 @@ import { CodeBlock } from 'react-code-blocks'
 import { LoadingSpinner } from '../LoadingSpinner'
 import { CodeBlockContainer } from '../CodeBlockContainer'
 import { PromptEngineeringHints } from '../PromptEngineeringHints'
+import './pongFont.css'
 
 let pongInstance: any = null
 
@@ -68,8 +69,16 @@ export default function PongGame({
           Restart
         </button>
       </div>
+      <div className="relative max-w-[672px] m-[16px]">
+        <canvas id="game" className="bg-black absolute left-0 top-0 " />
 
-      <canvas id="game" className="bg-black	m-4 " />
+        <div className="text-white absolute left-32 top-8 text-3xl font-bold pongFont">
+          You
+        </div>
+        <div className="text-white absolute right-32 top-8 text-3xl font-bold pongFont">
+          AI
+        </div>
+      </div>
     </div>
   )
 }

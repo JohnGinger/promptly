@@ -1,0 +1,7 @@
+@font-face {
+    font-family: 'bit53';
+    src: url('/bit5x3.ttf');
+}
+.pongFont {
+    font-family: 'bit53';
+}
