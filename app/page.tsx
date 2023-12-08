@@ -36,26 +36,40 @@ export default function Home() {
       <div className="flex flex-row">
         <div>
           <span className="text-black text-5xl font-bold font-sans leading-10">
-            Learn the future of prompting with{' '}
+            How good are you at{' '}
           </span>
           <span className="text-teal-300 text-5xl font-bold font-sans leading-10">
-            promptme
+            prompting?
           </span>
         </div>
         <img className="w-32" src="/images/mascot.png" />
       </div>
-      <div className="text-black text-3xl font-bold font-sanas leading-9 mt-8 mb-8">
-        How good are you at prompting?
-      </div>
+
       <div className="relative bg-white flex flex-col">
         <Card
-          title="PONG"
-          level="EASY"
-          description=" - Prompt Claude to move the pong bat up and down the screen."
+          title="Try PONG"
+          level=""
+          description="Prompt Claude to move the pong bat up and down the screen."
           image={'/images/pong.png'}
           link="/pong"
         />
-        <Card
+        <form
+          id="email-form"
+          action="https://script.google.com/macros/s/AKfycbzG4CI87VTiUTj1PnrSJxFpyNSP52fGqK9VIGdEbYJWap_V4U4SggfxL_VhpLKB6jZC/exec"
+          method="post"
+          className="flex w-full gap-3"
+        >
+          <input
+            placeholder="e.g. john@gmail.com"
+            className="input input-bordered w-full"
+            type="email"
+            name="email"
+          />
+          <button className="btn btn-primary text-white">
+            Sign up for more games
+          </button>
+        </form>
+        {/* <Card
           title="HUMAN EVAL"
           level="HARD"
           description=" - Prompt to solve problems that humans can solve but AI can't."
@@ -68,7 +82,7 @@ export default function Home() {
           description=" - Prompt Claude to learn rules to play the game.."
           image={'/images/minesweeper.png'}
           link="/minesweeper"
-        />
+        /> */}
         {/* Hide pacman for now <Card
           title="PAC-MAN"
           level="HARD"
