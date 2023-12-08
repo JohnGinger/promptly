@@ -73,17 +73,17 @@ export default function PongPage() {
             idealPrompt={`Write me a js function that plays pong. if ball_y is above paddle_y, return 1, otherwise, if ball_y is below return -1, else return 0. You should include the code in between <javascript></javascript> tags, do not include the function definition, only the body`}
           />
         </div>
-        <div className="w-full">
+        <div className="w-full min-h-screen">
           {loading && <LoadingSpinner />}
           <PongGame
             loading={loading}
             style={{ visibility: loading ? 'hidden' : 'initial' }}
           />
         </div>
+        <div className="lg:absolute bottom-0 right-0 p-4 bg-white ">
+          💬 What do you think? Let us know at feedback@trypromptme.com
+        </div>
       </NoSSR>
-      <div className="absolute bottom-0 right-0 p-4 bg-white shadow-md">
-        💬 What do you think? Let us know at feedback@trypromptme.com
-      </div>
     </div>
   )
 }

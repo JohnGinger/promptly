@@ -72,10 +72,10 @@ export default function PongGame({
       <div className="relative  m-[16px]">
         <canvas id="game" className="bg-black absolute left-0 top-0 w-full " />
 
-        <div className="text-white absolute left-32 top-8 text-3xl font-bold pongFont">
+        <div className="text-white absolute left-2 top-8 text-3xl font-bold pongFont">
           You
         </div>
-        <div className="text-white absolute right-32 top-8 text-3xl font-bold pongFont">
+        <div className="text-white absolute right-2 top-8 text-3xl font-bold pongFont">
           AI
         </div>
       </div>
