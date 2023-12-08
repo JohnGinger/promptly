@@ -69,8 +69,8 @@ export default function PongGame({
           Restart
         </button>
       </div>
-      <div className="relative max-w-[672px] m-[16px]">
-        <canvas id="game" className="bg-black absolute left-0 top-0 " />
+      <div className="relative  m-[16px]">
+        <canvas id="game" className="bg-black absolute left-0 top-0 w-full " />
 
         <div className="text-white absolute left-32 top-8 text-3xl font-bold pongFont">
           You
