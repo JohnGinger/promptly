@@ -81,6 +81,9 @@ export default function PongPage() {
           />
         </div>
       </NoSSR>
+      <div className="absolute bottom-0 right-0 p-4 bg-white shadow-md">
+        💬 What do you think? Let us know at feedback@trypromptme.com
+      </div>
     </div>
   )
 }
