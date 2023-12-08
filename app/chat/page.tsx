@@ -85,7 +85,7 @@ export default function ChatPage({
       }}
     >
       <Link href="/">
-        <div className="text-left text-teal-300 text-5xl font-bold font-sans leading-10 mb-6 pl-3">
+        <div className="text-left text-teal-300 text-5xl font-bold font-sans leading-10 pl-3">
           promptme
         </div>
       </Link>

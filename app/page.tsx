@@ -31,13 +31,12 @@ const Card = ({ title, level, description, image, link }: CardProps) => {
 }
 
 export default function Home() {
-
   return (
     <div className=" bg-white flex flex-col h-screen content-center ml-auto mr-auto p-8 flex-nowrap w-[40em]">
       <div className="flex flex-row">
         <div>
           <span className="text-black text-5xl font-bold font-sans leading-10">
-            Learn the future of programming with{' '}
+            Learn the future of prompting with{' '}
           </span>
           <span className="text-teal-300 text-5xl font-bold font-sans leading-10">
             promptme
