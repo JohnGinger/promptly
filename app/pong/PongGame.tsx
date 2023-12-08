@@ -73,10 +73,10 @@ export default function PongGame({
         <canvas id="game" className="bg-black absolute left-0 top-0 w-full " />
 
         <div className="text-white absolute left-2 top-8 text-3xl font-bold pongFont">
-          You
+          You & Claude
         </div>
         <div className="text-white absolute right-2 top-8 text-3xl font-bold pongFont">
-          AI
+          Computer
         </div>
       </div>
     </div>

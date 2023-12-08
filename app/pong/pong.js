@@ -140,8 +140,8 @@ Pong = {
 
   draw: function (ctx, dt) {
     this.court.draw(ctx, this.scores[0], this.scores[1])
-    this.leftPaddle.draw(ctx)
-    this.rightPaddle.draw(ctx)
+    this.leftPaddle.draw(ctx, '#5eead4')
+    this.rightPaddle.draw(ctx, 'white')
     let paddle_y = (this.leftPaddle.top + this.leftPaddle.bottom) / 2
     let direction =
       this.pongAI(
@@ -234,9 +234,11 @@ Pong = {
       if (this.winner == 0) {
         // draw text on the canvas
         ctx.font = '148px serif'
+        ctx.fillStyle = 'white'
         ctx.fillText('You win!', 35, 280)
       } else if (this.winner == 1) {
         ctx.font = '148px serif'
+        ctx.fillStyle = 'white'
         ctx.fillText('You lose!', 35, 280)
       }
     }
@@ -498,8 +500,8 @@ Pong = {
       }
     },
 
-    draw: function (ctx) {
-      ctx.fillStyle = Pong.Colors.walls
+    draw: function (ctx, colour) {
+      ctx.fillStyle = colour
       ctx.fillRect(this.x, this.y, this.width, this.height)
       if (this.prediction && this.pong.cfg.predictions) {
         ctx.strokeStyle = Pong.Colors.predictionExact
