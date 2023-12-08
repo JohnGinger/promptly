@@ -143,7 +143,7 @@ export default function ChatPage({
           Type your prompt to generate code in the box below
         </div>
         <textarea
-          className="min-h-[25em] border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 mb-4 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 p-4 bg-white bg-opacity-40 justify-start items-start gap-4 flex  z-10"
+          className="min-h-[15em] border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 mb-4 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 p-4 bg-white bg-opacity-40 justify-start items-start gap-4 flex  z-10"
           onChange={e => setNewMessage(e.target.value)}
           readOnly={loading}
           id="message"
