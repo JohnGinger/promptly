@@ -6,8 +6,9 @@ import Script from 'next/script'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'promptme',
-  description: 'Learn how to prompt with promptme'
+  title: 'promptme - to win a game of pong',
+  description:
+    'Improve your AI prompting skills through games like Pong and minesweeper, guided by Claude. '
 }
 
 export default function RootLayout({
@@ -28,8 +29,7 @@ export default function RootLayout({
         `}
       </Script>
       <Script id="hotjar">
-        {
-          `
+        {`
           ;(function (h, o, t, j, a, r) {
             h.hj =
               h.hj ||
@@ -43,10 +43,8 @@ export default function RootLayout({
             r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv
             a.appendChild(r)
           })(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=')
-          `
-        }
+          `}
       </Script>
-
 
       <body className={inter.className}>{children}</body>
     </html>
